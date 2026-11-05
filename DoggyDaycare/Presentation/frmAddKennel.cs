@@ -36,7 +36,7 @@ namespace DoggyDaycare
             // Use Case ID 1 -> Step 6: A Unique Kennel ID is assigned
             txtKennelID.Text = Kennels.getNextKennelID().ToString("000");
             txtKennelID.Enabled = false;
-            
+
             // Use Case ID -> Step 2: Retrieve the KennelTypes from the KennelTypes file
             DataSet dsKennelType = KennelTypes.getKennelTypes();
             cboKennelTypes.Items.Clear();
@@ -49,7 +49,7 @@ namespace DoggyDaycare
             // Use Case ID 1 -> Step 2: Retrieve the KennelCondition from the Kennels file
             DataSet dsKennelCondition = Kennels.getKennelConditions();
             cboKennelCondition.Items.Clear();
-            for(int i = 0; i < dsKennelCondition.Tables[0].Rows.Count; i++)
+            for (int i = 0; i < dsKennelCondition.Tables[0].Rows.Count; i++)
             {
                 // Use Case ID 1 -> Step 3: Load on Combobox for Kennel Condition
                 cboKennelCondition.Items.Add(dsKennelCondition.Tables[0].Rows[i][0].ToString());
