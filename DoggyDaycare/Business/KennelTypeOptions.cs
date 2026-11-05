@@ -16,5 +16,7 @@ namespace DoggyDaycare.Business
             this.TypeCode = TypeCode;
             this.Description = Description;
         }
+
+        
     }
 }
