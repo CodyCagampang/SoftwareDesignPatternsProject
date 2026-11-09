@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using DoggyDaycare.Business;
+using DoggyDaycare.Database;
 
 namespace DoggyDaycare
 {
@@ -17,7 +19,10 @@ namespace DoggyDaycare
 
         private void mnuAddKennel_Click(object sender, EventArgs e)
         {
-            frmAddKennel addKennel = new frmAddKennel(this);
+            KennelRepository repository = new KennelRepository();
+            KennelOperations operations = new KennelOperations(repository);
+
+            frmAddKennel addKennel = new frmAddKennel(this, operations);
             this.Hide();
             addKennel.ShowDialog();
             this.Show();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoggyDaycare.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,10 @@ namespace DoggyDaycare.Business
     public interface IKennelRepository
     {
         List<KennelTypeOptions> GetKennelTypes();
+        List<String> GetKennelConditions();
+
+        List<String> GetKennelStatus();
+
+        void AddKennel(Kennels kennel);
     }
 }

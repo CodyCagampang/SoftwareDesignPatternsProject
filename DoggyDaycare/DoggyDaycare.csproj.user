@@ -7,7 +7,7 @@
     <Compile Update="frmAdminLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmBookAKennel.cs">
+    <Compile Update="Presentation\frmBookAKennel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="frmCancelReservation.cs">
@@ -19,7 +19,7 @@
     <Compile Update="frmClientRegister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmDeleteKennel.cs">
+    <Compile Update="Presentation\frmDeleteKennel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="frmDeleteAClient.cs">
@@ -34,7 +34,7 @@
     <Compile Update="frmRegisterPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmUpdateKennel.cs">
+    <Compile Update="Presentation\frmUpdateKennel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="frmUserDashboard.cs">
