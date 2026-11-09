@@ -17,6 +17,11 @@ namespace DoggyDaycare.Business
             this.Description = Description;
         }
 
+        public class KennelOperations
+        {
+            private readonly IKennelRepository repository;
+        }
+
         
     }
 }
