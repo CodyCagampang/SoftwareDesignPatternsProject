@@ -1,9 +1,12 @@
-﻿using System;
+﻿using DoggyDaycare.Database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using DoggyDaycare.Business;
+using DoggyDaycare.Database;
 
 namespace DoggyDaycare
 {
@@ -11,16 +14,17 @@ namespace DoggyDaycare
     {
         frmMainMenu parent;
         Kennels theKennel = new Kennels();
-
+        private readonly KennelOperations kennelOperations;
         public frmUpdateKennel()
         {
             InitializeComponent(); // Begin the Update a Kennel Function
         }
 
-        public frmUpdateKennel(frmMainMenu Parent)
+        public frmUpdateKennel(frmMainMenu Parent, KennelOperations kennelOperations)
         {
             InitializeComponent();
             parent = Parent;
+            this.kennelOperations = kennelOperations;
         }
 
         private void btnSearchKennelID_Click(object sender, EventArgs e)

@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using DoggyDaycare.Business;
 
 namespace DoggyDaycare
 {
@@ -13,16 +14,18 @@ namespace DoggyDaycare
     {
 
         private frmMainMenu parent;
+        private readonly KennelOperations kennelOperations;
 
         public frmAddKennel()
         {
             InitializeComponent(); // Use Case ID 1 --> Step 1: Begin Add Kennel Function
         }
 
-        public frmAddKennel(frmMainMenu parent)
+        public frmAddKennel(frmMainMenu parent, KennelOperations kennelOperations)
         {
             InitializeComponent();
             this.parent = parent;
+            this.kennelOperations = kennelOperations;
         }
 
         private void mnuBackToMainMenu_Click(object sender, EventArgs e)
@@ -36,78 +39,73 @@ namespace DoggyDaycare
             // Use Case ID 1 -> Step 6: A Unique Kennel ID is assigned
             txtKennelID.Text = Kennels.getNextKennelID().ToString("000");
             txtKennelID.Enabled = false;
-            
-            // Use Case ID -> Step 2: Retrieve the KennelTypes from the KennelTypes file
-            DataSet dsKennelType = KennelTypes.getKennelTypes();
+
+            List<KennelTypeOptions> types = kennelOperations.GetKennelTypes();
             cboKennelTypes.Items.Clear();
-            for (int i = 0; i < dsKennelType.Tables[0].Rows.Count; i++)
+
+            foreach (KennelTypeOptions type in types)
             {
-                // Use Case ID 1 --> Step 3: Load on Combobox for Kennel Types
-                cboKennelTypes.Items.Add(dsKennelType.Tables[0].Rows[i][0] + " - " + dsKennelType.Tables[0].Rows[i][1]);
+                cboKennelTypes.Items.Add(type.TypeCode + " - " + type.Description);
             }
 
-            // Use Case ID 1 -> Step 2: Retrieve the KennelCondition from the Kennels file
-            DataSet dsKennelCondition = Kennels.getKennelConditions();
+
+
+
+            List<String> conditions = kennelOperations.GetKennelConditions();
             cboKennelCondition.Items.Clear();
-            for(int i = 0; i < dsKennelCondition.Tables[0].Rows.Count; i++)
+
+            foreach(String condition in conditions)
             {
-                // Use Case ID 1 -> Step 3: Load on Combobox for Kennel Condition
-                cboKennelCondition.Items.Add(dsKennelCondition.Tables[0].Rows[i][0].ToString());
+                cboKennelCondition.Items.Add(condition);
             }
 
-            // Use Case ID 1 -> Step 2: Retrieve the KennelStatus from the Kennels File
-            DataSet dsKennelStatus = Kennels.getKennelStatuses();
+            List<String> statuses = kennelOperations.GetKennelStatus();
             cboCurrentStatus.Items.Clear();
-            for (int i = 0; i < dsKennelStatus.Tables[0].Rows.Count; i++)
+
+            foreach(String status in statuses)
             {
-                // Use Case ID 1 -> Step 3: Load on Combobox for Kennel Status
-                cboCurrentStatus.Items.Add(dsKennelStatus.Tables[0].Rows[i][0].ToString());
+                cboCurrentStatus.Items.Add(status);
             }
         }
 
 
         private void btnAddKennel_Click(object sender, EventArgs e)
         {
-
-            // Use Case ID 1 --> Error Handling: Invalid Daily Rate Value
-            try
+            if (!kennelOperations.IsDescriptionValid(txtKennelDescription.Text) || cboKennelTypes.SelectedIndex == -1 || cboKennelCondition.SelectedIndex == -1 || cboCurrentStatus.SelectedIndex == -1 || string.IsNullOrWhiteSpace(txtDailyRate.Text)) 
+               
             {
-                if(Convert.ToDecimal(txtDailyRate.Text) <= 0)
-                {
-                    MessageBox.Show("You must enter a number greater than 0 for the daily rate. Please re-enter!");
-                    return;
-                }
-            }
-            catch {
+                MessageBox.Show("All Fields must be entered!");
+                return;
+            } 
+
+
+            if(!decimal.TryParse(txtDailyRate.Text, out decimal dailyRate))
+            {
                 MessageBox.Show("That isn't a number. Please re-enter a value!");
                 return;
             }
 
-            // Use Case ID 1 --> Error Handling: Empty Values
-            if (txtKennelDescription.Text.Trim() == "" || cboKennelCondition.SelectedIndex == -1 || cboKennelTypes.SelectedIndex == -1 || cboCurrentStatus.SelectedIndex == -1 || txtDailyRate.Text.Trim() == "")
+            if (!kennelOperations.IsDailyRateValid(dailyRate))
             {
-                MessageBox.Show("All Fields must be entered!");
+                MessageBox.Show("You must enter a daily rate greater than zero.");
                 return;
             }
-
-
-            // Use Case ID 1 --> Step 5: Validate Data
-            Kennels aKennel = new Kennels(Convert.ToInt32(txtKennelID.Text), cboKennelTypes.Text.Substring(0 , 1), txtKennelDescription.Text, cboKennelCondition.Text,
-                Convert.ToDecimal(txtDailyRate.Text), cboCurrentStatus.Text);
-
-            // Use Case ID 1 --> Step 7: Save the object into the Kennels File
-            aKennel.addKennel();
-
-            // Use Case ID 1 --> Step 8: Display Confirmation Message
-            MessageBox.Show("Kennel " + txtKennelID.Text + " has been added successfully!", "Kennel Added", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-            // Step 9: Reset UI
-            txtKennelID.Text = Kennels.getNextKennelID().ToString("000");
-            cboKennelTypes.SelectedIndex = -1;
-            txtKennelDescription.Clear();
-            cboKennelCondition.SelectedIndex = -1;
-            txtDailyRate.Clear();
-            cboCurrentStatus.SelectedIndex = -1;
+            Kennels aKennel = new Kennels(Convert.ToInt32(txtKennelID.Text), cboKennelTypes.Text.Substring(0, 1), txtKennelDescription.Text.Trim(), cboKennelCondition.Text, dailyRate, cboCurrentStatus.Text);
+            try
+            {
+                kennelOperations.AddKennel(aKennel);
+            }
+            catch(ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+            catch(InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+            MessageBox.Show("Kennel " + txtKennelID.Text + " has been added successfully!");
         }
     }
 }
