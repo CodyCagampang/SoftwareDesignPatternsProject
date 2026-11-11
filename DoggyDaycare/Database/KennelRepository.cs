@@ -106,6 +106,43 @@ namespace DoggyDaycare.Database
                 throw new InvalidOperationException("The kennel could not be saved. Please try again.", ex);
             }
         }
+
+        public List<AvailableKennel> GetAvailableKennels(String size)
+        {
+            List<AvailableKennel> kennelRows = new List<AvailableKennel>();
+            OracleConnection conn = new OracleConnection(DBConnect.oradb);
+            conn.Open();
+
+            string sqlQuery = "SELECT KennelID, KennelType, DailyRate, Description, KennelCondition, Status " +
+             "FROM Kennels WHERE KennelType = :kennelSize AND Status = 'Available' " + "ORDER BY KennelID";
+
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+            cmd.BindByName = true;
+
+            cmd.Parameters.Add("kennelSize", size);
+
+            DataTable dt = new DataTable();
+
+            da.Fill(dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                AvailableKennel newKennel = new AvailableKennel {
+                    KennelID = Convert.ToInt32(row["KennelID"]),
+                    KennelType = row["KennelType"].ToString(),
+                    DailyRate = Convert.ToDecimal(row["DailyRate"]),
+                    Description = row["Description"].ToString(),
+                    KennelCondition = row["KennelCondition"].ToString(),
+                    Status = row["Status"].ToString()
+                };
+                kennelRows.Add(newKennel);
+        }
+            return kennelRows;
+        }
+    
+
+
     }
 }
     

@@ -49,15 +49,34 @@ namespace DoggyDaycare.Business
                 throw new ArgumentNullException(nameof(kennel));
             }
 
-            if (String.IsNullOrWhiteSpace(kennel.getKennelType()) || String.IsNullOrWhiteSpace(kennel.getKennelDescription()) || String.IsNullOrWhiteSpace(kennel.getKennelCondition()) || String.IsNullOrWhiteSpace(kennel.getStatus())) {
+            if (String.IsNullOrWhiteSpace(kennel.getKennelType()) || String.IsNullOrWhiteSpace(kennel.getKennelDescription()) || String.IsNullOrWhiteSpace(kennel.getKennelCondition()) || String.IsNullOrWhiteSpace(kennel.getStatus()))
+            {
                 throw new ArgumentException("All Fields must be entered!");
             }
 
-            if (!IsDailyRateValid(kennel.getDailyRate())) {
+            if (!IsDailyRateValid(kennel.getDailyRate()))
+            {
                 throw new ArgumentException("Daily Rate must be a valid decimal!");
             }
 
             repository.AddKennel(kennel);
-    }
+        }
+
+        public bool isKennelSizeValid(String size)
+        {
+            return size == "S" || size == "M" || size == "L";
+        }
+
+        public List<AvailableKennel> GetAvailableKennels(String size)
+        {
+            if (!isKennelSizeValid(size))
+            {
+                throw new ArgumentException("Invalid Kennel Size");
+            }
+            return repository.GetAvailableKennels(size);
+
+
+
+        }
     }
 }

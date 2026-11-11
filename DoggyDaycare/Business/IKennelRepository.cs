@@ -15,5 +15,6 @@ namespace DoggyDaycare.Business
         List<String> GetKennelStatus();
 
         void AddKennel(Kennels kennel);
+        List<AvailableKennel> GetAvailableKennels(String size);
     }
 }

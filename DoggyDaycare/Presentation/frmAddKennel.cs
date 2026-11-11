@@ -90,14 +90,7 @@ namespace DoggyDaycare
                 MessageBox.Show("You must enter a daily rate greater than zero.");
                 return;
             }
-            Kennels aKennel = new Kennels(
-                Convert.ToInt32(txtKennelID.Text),
-                cboKennelTypes.Text.Substring(0, 1),
-                txtKennelDescription.Text.Trim(),
-                cboKennelCondition.Text,
-                dailyRate,
-                cboCurrentStatus.Text
-                );
+            Kennels aKennel = new Kennels(Convert.ToInt32(txtKennelID.Text), cboKennelTypes.Text.Substring(0, 1), txtKennelDescription.Text.Trim(), cboKennelCondition.Text, dailyRate, cboCurrentStatus.Text);
             try
             {
                 kennelOperations.AddKennel(aKennel);
