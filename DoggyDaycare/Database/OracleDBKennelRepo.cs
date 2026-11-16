@@ -10,7 +10,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DoggyDaycare.Database
 {
-    public class KennelRepository : IKennelRepository
+    public class OracleDBKennelRepo : IOracleDBKennelRepo
     {
         public List<KennelTypeOptions> GetKennelTypes()
         {
@@ -140,6 +140,41 @@ namespace DoggyDaycare.Database
         }
             return kennelRows;
         }
+
+        public DataTable SearchByKennelId(int id)
+        {
+            String sqlQuery = "SELECT * FROM Kennels WHERE KennelID = :kennelID";
+            OracleConnection conn = new OracleConnection(DBConnect.oradb);
+            conn.Open();
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+            cmd.BindByName = true;
+            cmd.Parameters.Add("KennelID", OracleDbType.Int32).Value = id;
+
+            var results = new DataTable();
+            da.Fill(results);
+            return results;
+        }
+        public bool UpdateKennel(int id, String kennelType, String description, String kennelCondiion, decimal dailyRate, String status)
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oradb);
+            String sqlQuery = "UPDATE Kennels " + "SET kennelType = :kennelType, description = :description, kennelCondition = :kennelCondition, dailyRate = :dailyRate, status = :status" +
+                               " WHERE kennelID = :kennelID";
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            cmd.BindByName = true;
+            cmd.Parameters.Add("kennelID", id);
+            cmd.Parameters.Add("kennelType", kennelType);
+            cmd.Parameters.Add("description", description);
+            cmd.Parameters.Add("kennelCondition", kennelCondiion);
+            cmd.Parameters.Add("dailyRate", dailyRate);
+            cmd.Parameters.Add("status", status);
+            conn.Open();
+            int changedRows = cmd.ExecuteNonQuery();
+            return changedRows == 1;
+            
+        }
+
+
     
 
 

@@ -1,17 +1,19 @@
 ﻿using DoggyDaycare.Database;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DoggyDaycare.Business
 {
-    public class KennelOperations
+    public class KennelBusinessRules
     {
-        private readonly IKennelRepository repository;
+        private readonly IOracleDBKennelRepo repository;
 
-        public KennelOperations(IKennelRepository repository)
+        public KennelBusinessRules(IOracleDBKennelRepo repository)
         {
             this.repository = repository;
         }
@@ -74,9 +76,40 @@ namespace DoggyDaycare.Business
                 throw new ArgumentException("Invalid Kennel Size");
             }
             return repository.GetAvailableKennels(size);
+        }
 
+        public DataTable SearchKennelById(int id)
+        {
+            return repository.SearchByKennelId(id);
+        }
 
+        public void UpdateKennel(Kennels kennel)
+        {
+            if (kennel == null)
+            {
+                throw new ArgumentNullException(nameof(kennel));
+            }
 
+            if (kennel.getKennelID() <= 0)
+            {
+                throw new ArgumentException("Please select a kennel to update");
+            }
+
+            if (!IsDescriptionValid(kennel.getKennelDescription()))
+            {
+                throw new ArgumentException("Please enter a kennel description");
+            }
+
+            if (!IsDailyRateValid(kennel.getDailyRate()))
+            {
+                throw new ArgumentException("Please enter a valid daily rate");
+            }
+
+            if(string.IsNullOrWhiteSpace(kennel.getKennelType()) || string.IsNullOrWhiteSpace(kennel.getKennelCondition()) || string.IsNullOrWhiteSpace(kennel.getStatus())) {
+                throw new ArgumentException("Please select a type, condition and status");
+            }
+
+            bool updatedKennel = repository.UpdateKennel(kennel.getKennelID(), kennel.getKennelType(), kennel.getKennelDescription(), kennel.getKennelCondition(), kennel.getDailyRate(), kennel.getStatus());
         }
     }
 }

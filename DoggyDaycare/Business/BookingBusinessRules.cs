@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace DoggyDaycare.Business
 {
-    public class BookingOperations
+    public class BookingBusinessRules
     {
         private readonly IBookingRepository repository;
 
-        public BookingOperations(IBookingRepository repository)
+        public BookingBusinessRules(IBookingRepository repository)
         {
             this.repository = repository;
         }

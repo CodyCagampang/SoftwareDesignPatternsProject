@@ -4,7 +4,7 @@
     <Compile Update="Presentation\frmAddKennel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmAdminLogin.cs">
+    <Compile Update="Presentation\frmAdminLogin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Presentation\frmBookAKennel.cs">
@@ -28,7 +28,7 @@
     <Compile Update="frmListAllClients.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmMainMenu.cs">
+    <Compile Update="Presentation\frmMainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="frmRegisterPage.cs">

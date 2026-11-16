@@ -35,10 +35,10 @@
             mnuAddKennel = new ToolStripMenuItem();
             mnuRemoveKennel = new ToolStripMenuItem();
             mnuUpdateKennel = new ToolStripMenuItem();
+            mnuBookAKennel = new ToolStripMenuItem();
             clientsToolStripMenuItem = new ToolStripMenuItem();
             mnuDeRegisterClient = new ToolStripMenuItem();
             mnuListAllClients = new ToolStripMenuItem();
-            mnuBookAKennel = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -90,6 +90,13 @@
             mnuUpdateKennel.Text = "Update Kennel";
             mnuUpdateKennel.Click += mnuUpdateKennel_Click;
             // 
+            // mnuBookAKennel
+            // 
+            mnuBookAKennel.Name = "mnuBookAKennel";
+            mnuBookAKennel.Size = new Size(224, 26);
+            mnuBookAKennel.Text = "Book A Kennel";
+            mnuBookAKennel.Click += mnuBookAKennel_Click;
+            // 
             // clientsToolStripMenuItem
             // 
             clientsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mnuDeRegisterClient, mnuListAllClients });
@@ -110,13 +117,6 @@
             mnuListAllClients.Size = new Size(213, 26);
             mnuListAllClients.Text = "List All Clients";
             mnuListAllClients.Click += mnuListAllClients_Click;
-            // 
-            // mnuBookAKennel
-            // 
-            mnuBookAKennel.Name = "mnuBookAKennel";
-            mnuBookAKennel.Size = new Size(224, 26);
-            mnuBookAKennel.Text = "Book A Kennel";
-            mnuBookAKennel.Click += this.mnuBookAKennel_Click;
             // 
             // frmMainMenu
             // 

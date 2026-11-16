@@ -9,7 +9,7 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace DoggyDaycare
 {
-    class Dogs
+    public class Dogs
     {
         private int DogID;
         private int ClientID;

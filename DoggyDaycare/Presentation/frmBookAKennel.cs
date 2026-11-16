@@ -17,8 +17,8 @@ namespace DoggyDaycare
     {
         Kennels theKennel = new Kennels();
         Clients bookClient = new Clients();
-        private readonly KennelOperations kennelOperations;
-        private readonly BookingOperations bookingOperations;
+        private readonly KennelBusinessRules kennelOperations;
+        private readonly BookingBusinessRules bookingOperations;
         private readonly DogBusinessRules dogBusinessRules;
       
         
@@ -27,8 +27,8 @@ namespace DoggyDaycare
         {
             InitializeComponent();
 
-            this.kennelOperations = new KennelOperations(new KennelRepository());
-            bookingOperations = new BookingOperations(new BookingRepository());
+            this.kennelOperations = new KennelBusinessRules(new OracleDBKennelRepo());
+            bookingOperations = new BookingBusinessRules(new OracleDBBookingRepo());
             dogBusinessRules = new DogBusinessRules();
         }
 

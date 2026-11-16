@@ -14,14 +14,14 @@ namespace DoggyDaycare
     {
 
         private frmMainMenu parent;
-        private readonly KennelOperations kennelOperations;
+        private readonly KennelBusinessRules kennelOperations;
 
         public frmAddKennel()
         {
             InitializeComponent(); // Use Case ID 1 --> Step 1: Begin Add Kennel Function
         }
 
-        public frmAddKennel(frmMainMenu parent, KennelOperations kennelOperations)
+        public frmAddKennel(frmMainMenu parent, KennelBusinessRules kennelOperations)
         {
             InitializeComponent();
             this.parent = parent;
@@ -36,7 +36,7 @@ namespace DoggyDaycare
 
         private void frmAddKennel_Load(object sender, EventArgs e)
         {
-            // Use Case ID 1 -> Step 6: A Unique Kennel ID is assigned
+         
             txtKennelID.Text = Kennels.getNextKennelID().ToString("000");
             txtKennelID.Enabled = false;
 

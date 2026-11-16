@@ -40,7 +40,7 @@
             // 
             // btnRegisterClient
             // 
-            btnRegisterClient.Location = new Point(314, 323);
+            btnRegisterClient.Location = new Point(303, 322);
             btnRegisterClient.Name = "btnRegisterClient";
             btnRegisterClient.Size = new Size(174, 29);
             btnRegisterClient.TabIndex = 0;
@@ -50,7 +50,7 @@
             // 
             // btnLoginAsAdmin
             // 
-            btnLoginAsAdmin.Location = new Point(314, 423);
+            btnLoginAsAdmin.Location = new Point(303, 437);
             btnLoginAsAdmin.Name = "btnLoginAsAdmin";
             btnLoginAsAdmin.Size = new Size(174, 29);
             btnLoginAsAdmin.TabIndex = 1;
@@ -95,7 +95,7 @@
             // 
             // btnLoginAsClient
             // 
-            btnLoginAsClient.Location = new Point(314, 371);
+            btnLoginAsClient.Location = new Point(303, 375);
             btnLoginAsClient.Name = "btnLoginAsClient";
             btnLoginAsClient.Size = new Size(174, 29);
             btnLoginAsClient.TabIndex = 7;

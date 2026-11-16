@@ -19,8 +19,8 @@ namespace DoggyDaycare
 
         private void mnuAddKennel_Click(object sender, EventArgs e)
         {
-            KennelRepository repository = new KennelRepository();
-            KennelOperations operations = new KennelOperations(repository);
+            OracleDBKennelRepo repository = new OracleDBKennelRepo();
+            KennelBusinessRules operations = new KennelBusinessRules(repository);
 
             frmAddKennel addKennel = new frmAddKennel(this, operations);
             this.Hide();
@@ -45,7 +45,7 @@ namespace DoggyDaycare
 
         private void mnuUpdateKennel_Click(object sender, EventArgs e)
         {
-            KennelOperations kennelOperations = new KennelOperations(new KennelRepository());
+            KennelBusinessRules kennelOperations = new KennelBusinessRules(new OracleDBKennelRepo());
             frmUpdateKennel nextForm = new frmUpdateKennel(this, kennelOperations);
             this.Hide();
             nextForm.ShowDialog();

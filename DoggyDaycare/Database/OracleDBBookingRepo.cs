@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DoggyDaycare.Database
 {
-    public class BookingRepository : IBookingRepository
+    public class OracleDBBookingRepo : IBookingRepository
     {
         public int SaveBooking(Dogs dog, Reservations reservation, String kennelType, decimal dailyRate, decimal totalCost)
         {

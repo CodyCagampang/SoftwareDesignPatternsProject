@@ -19,7 +19,7 @@ namespace DoggyDaycare.Business
 
         public class KennelOperations
         {
-            private readonly IKennelRepository repository;
+            private readonly IOracleDBKennelRepo repository;
         }
 
         

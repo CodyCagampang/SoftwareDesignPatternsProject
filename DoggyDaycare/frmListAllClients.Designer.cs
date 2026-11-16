@@ -52,7 +52,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { mnuBackToMainMenu });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 28);
+            menuStrip1.Size = new Size(1107, 28);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -67,18 +67,18 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1107, 450);
             Controls.Add(grdViewClients);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "frmListAllClients";
             Text = "List All Clients";
+            Load += frmListAllClients_Load;
             ((System.ComponentModel.ISupportInitialize)grdViewClients).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
-            this.Load += frmListAllClients_Load;
 
         }
 

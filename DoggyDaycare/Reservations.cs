@@ -9,7 +9,7 @@ using DoggyDaycare.Database;
 using Oracle.ManagedDataAccess.Client;
 namespace DoggyDaycare
 {
-    class Reservations
+     public class Reservations
     {
         private int resID;
         private int clientID;
