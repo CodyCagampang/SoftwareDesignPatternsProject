@@ -82,7 +82,7 @@ namespace DoggyDaycare
             selectedKennelId = Convert.ToInt32(row["KennelID"]);
             cboKennelTypes.SelectedIndex = cboKennelTypes.FindString(row["KennelType"].ToString().Trim() + " ");
             txtKennelDescription.Text = row["Description"].ToString();
-            cboKennelCondition.SelectedIndex = cboKennelTypes.FindStringExact(row["KennelCondition"].ToString().Trim());
+            cboKennelCondition.SelectedIndex = cboKennelCondition.FindStringExact(row["KennelCondition"].ToString().Trim());
             txtDailyRate.Text = Convert.ToDecimal(row["DailyRate"]).ToString("0.00");
             cboCurrentStatus.SelectedIndex = cboCurrentStatus.FindString(row["Status"].ToString());
             grpKennel.Visible = true;

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using System.Transactions;
 
 namespace DoggyDaycare.Database
 {
@@ -46,7 +48,7 @@ namespace DoggyDaycare.Database
 
                     int changedRows = cmd.ExecuteNonQuery();
 
-                    if(changedRows != 1)
+                    if (changedRows != 1)
                     {
                         throw new InvalidOperationException("The kennel is unavailable, or its details have been changed");
                     }
@@ -81,7 +83,8 @@ namespace DoggyDaycare.Database
                     transaction.Commit();
 
                     return reservationID;
-                } catch
+                }
+                catch
                 {
                     transaction.Rollback();
                     throw;
@@ -92,6 +95,80 @@ namespace DoggyDaycare.Database
                 throw new InvalidOperationException("Booking could not be saved", ex);
             }
 
-    } 
+        }
+
+        public DataTable GetConfirmedReservations(int clientId)
+        {
+            string sqlQuery = "SELECT r.ResID, r.KennelID, r.StartDate, r.EndDate, d.DogName, d.DogBreed, d.DogWeight, k.KennelType, k.DailyRate " +
+                "FROM Reservations r JOIN Dogs d ON d.DogID = r.DogID " + "JOIN Kennels k ON k.KennelID = r.KennelID WHERE r.ClientID = :clientId " +
+                "AND r.ResStatus = 'Confirmed' ORDER BY r.StartDate, r.ResID";
+
+            OracleConnection conn = new OracleConnection(DBConnect.oradb);
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+
+            cmd.BindByName = true;
+            cmd.Parameters.Add("clientId", OracleDbType.Int32).Value = clientId;
+
+            var reservations = new DataTable();
+            da.Fill(reservations);
+
+            return reservations;
+
+        }
+
+        public DataTable GetReservationForClient(int reservationID, int clientId)
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oradb);
+            String sqlQuery = "SELECT ResID, KennelID, StartDate, ResStatus FROM Reservations WHERE ResID = :resId AND ClientID = :clientId";
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+
+            cmd.BindByName = true;
+            cmd.Parameters.Add("resId", OracleDbType.Int32).Value = reservationID;
+            cmd.Parameters.Add("clientId", OracleDbType.Int32).Value = clientId;
+
+            var results = new DataTable();
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+            da.Fill(results);
+
+            return results;
+
+        }
+
+        public bool TryCancelReservationForClient(int reservationID, int clientId, DateTime cancellationPeriod)
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oradb);
+            String sqlQuery = "UPDATE Reservations SET ResStatus = 'Cancelled' WHERE ResID = :reservationId AND ClientID = :clientId AND ResStatus = 'Confirmed' AND StartDate >= :cancellationPeriod";
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            cmd.CommandText = sqlQuery;
+            cmd.BindByName = true;
+            OracleTransaction transaction = conn.BeginTransaction();
+
+            cmd.Parameters.Add("reservationId", OracleDbType.Int32).Value = reservationID;
+            cmd.Parameters.Add("clientId", OracleDbType.Int32).Value = clientId;
+            cmd.Parameters.Add("cancellationPeriod", OracleDbType.Date).Value = cancellationPeriod;
+
+            int reservationRows = cmd.ExecuteNonQuery();
+            if(reservationRows != 1)
+            {
+                transaction.Rollback();
+                return false;
+            }
+            cmd.Parameters.Clear();
+
+            sqlQuery = "UPDATE Kennels SET STATUS = 'Available' WHERE KennelID = (SELECT KennelID FROM Reservations WHERE ResID = :reservationID)";
+            cmd.Parameters.Add("reservationId", OracleDbType.Int32).Value = reservationID;
+            int kennelRows = cmd.ExecuteNonQuery();
+            if(kennelRows != 1)
+            {
+                transaction.Rollback();
+                return false;
+            }
+
+            transaction.Commit();
+            return true;
+
+        }
     }
 }
+

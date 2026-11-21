@@ -101,7 +101,7 @@ namespace DoggyDaycare.Database
                 cmd.Parameters.Add("Status", kennel.getStatus());
                 cmd.ExecuteNonQuery();
             }
-            catch(OracleException ex)
+            catch (OracleException ex)
             {
                 throw new InvalidOperationException("The kennel could not be saved. Please try again.", ex);
             }
@@ -128,7 +128,8 @@ namespace DoggyDaycare.Database
 
             foreach (DataRow row in dt.Rows)
             {
-                AvailableKennel newKennel = new AvailableKennel {
+                AvailableKennel newKennel = new AvailableKennel
+                {
                     KennelID = Convert.ToInt32(row["KennelID"]),
                     KennelType = row["KennelType"].ToString(),
                     DailyRate = Convert.ToDecimal(row["DailyRate"]),
@@ -137,7 +138,7 @@ namespace DoggyDaycare.Database
                     Status = row["Status"].ToString()
                 };
                 kennelRows.Add(newKennel);
-        }
+            }
             return kennelRows;
         }
 
@@ -171,12 +172,22 @@ namespace DoggyDaycare.Database
             conn.Open();
             int changedRows = cmd.ExecuteNonQuery();
             return changedRows == 1;
-            
+
         }
 
+        public static DataSet retrieveAllReservations(int clientID)
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oradb);
+            conn.Open();
 
-    
-
+            String sqlQuery = "SELECT * FROM Reservations WHERE ClientID = " + clientID + " AND ResStatus = 'Confirmed'";
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "Reservations");
+            conn.Close();
+            return ds;
+        }
 
     }
 }

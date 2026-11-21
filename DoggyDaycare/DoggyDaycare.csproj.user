@@ -10,13 +10,13 @@
     <Compile Update="Presentation\frmBookAKennel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmCancelReservation.cs">
+    <Compile Update="Presentation\frmCancelReservation.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="frmClientLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmClientRegister.cs">
+    <Compile Update="Presentation\frmClientRegister.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Presentation\frmDeleteKennel.cs">

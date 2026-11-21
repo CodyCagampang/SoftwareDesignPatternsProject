@@ -15,7 +15,6 @@ namespace DoggyDaycare
 {
     public partial class frmBookAKennel : Form
     {
-        Kennels theKennel = new Kennels();
         Clients bookClient = new Clients();
         private readonly KennelBusinessRules kennelOperations;
         private readonly BookingBusinessRules bookingOperations;

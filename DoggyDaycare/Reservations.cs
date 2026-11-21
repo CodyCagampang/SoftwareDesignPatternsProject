@@ -148,19 +148,7 @@ namespace DoggyDaycare
             conn.Close();
         }
 
-        public static DataSet retrieveAllReservations(int clientID)
-        {
-            OracleConnection conn = new OracleConnection(DBConnect.oradb);
-            conn.Open();
-
-            String sqlQuery = "SELECT * FROM Reservations WHERE ClientID = " + clientID + " AND ResStatus = 'Confirmed'";
-            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds, "Reservations");
-            conn.Close();
-            return ds;
-        }
+       
         public static int getNextReservationID()
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);

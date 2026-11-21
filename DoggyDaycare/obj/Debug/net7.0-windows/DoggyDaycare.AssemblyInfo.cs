@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DoggyDaycare")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0620b94d8863cbadb6daff665c6332be7783fce2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2834ce52ae179efb36c72bea7c58ff5c0cc6c04a")]
 [assembly: System.Reflection.AssemblyProductAttribute("DoggyDaycare")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DoggyDaycare")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

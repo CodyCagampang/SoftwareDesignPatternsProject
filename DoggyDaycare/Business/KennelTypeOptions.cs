@@ -17,10 +17,7 @@ namespace DoggyDaycare.Business
             this.Description = Description;
         }
 
-        public class KennelOperations
-        {
-            private readonly IOracleDBKennelRepo repository;
-        }
+        
 
         
     }

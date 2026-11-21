@@ -1,6 +1,7 @@
 ﻿using DoggyDaycare.Database;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,25 +41,26 @@ namespace DoggyDaycare.Business
             return totalDays;
         }
 
+
+        // Context class --> Implements the strategy interface
         public bool isWeightValid(String kennelType, double weight)
         {
-            if (kennelType == "S") 
-            { 
-                return weight > 0 && weight <= 10; 
-            
-            }
-
-            if (kennelType == "M")
+            IStrategyPatternDogWeight kennelWeight;
+            switch(kennelType)
             {
-                return weight >= 11 && weight <= 20;
+                case "S":
+                    kennelWeight = new SmallKennelWeight();
+                    break;
+                case "M":
+                    kennelWeight = new MediumKennelWeight();
+                    break;
+                case "L":
+                    kennelWeight = new LargeKennelWeight();
+                    break;
+                default:
+                    return false;
             }
-
-            if (kennelType == "L")
-            {
-                return weight >= 21 && weight <= 60;
-            }
-
-            return false;
+            return kennelWeight.validateDogWeight(weight);
         }
 
         public decimal CalculateTotalCost(int totalDays, decimal dailyRate)
@@ -106,6 +108,44 @@ namespace DoggyDaycare.Business
 
             return repository.SaveBooking(dog, reservation, kennelType, dailyRate, totalCost);
         }
+
+        public DataTable getConfirmedReservation(int clientID)
+        {
+            return repository.GetConfirmedReservations(clientID);
+        }
+
+        public void CancelReservation(int reservationId, int clientId)
+        {
+            DataTable results = repository.GetReservationForClient(reservationId, clientId);
+            if (results.Rows.Count == 0)
+            {
+                throw new InvalidOperationException("Reservation not found.");
+            }
+
+            DataRow reservation = results.Rows[0];
+
+            if (reservation["ResStatus"].ToString() != "Confirmed")
+            {
+                throw new InvalidOperationException("Only Confirmed Kennel Statuses can be cancelled");
+            }
+
+            DateTime startDate = Convert.ToDateTime(reservation["startDate"]);
+            DateTime cancellationPeriod = DateTime.Now.AddHours(72);
+
+            if (startDate < cancellationPeriod)
+            {
+                throw new InvalidOperationException("You must cancel at least 72 hours before check-in.");
+            }
+
+            bool cancelled = repository.TryCancelReservationForClient(reservationId, clientId, cancellationPeriod);
+            if (!cancelled)
+            {
+                throw new InvalidOperationException("This reservation is no longer cancellable.");
+            }
+        }
+
+
+
 
 
     }
