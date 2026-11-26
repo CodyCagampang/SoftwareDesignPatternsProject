@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DoggyDaycare.Business;
+using DoggyDaycare.Database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,14 +15,18 @@ namespace DoggyDaycare
 {
     public partial class frmListAllClients : Form
     {
+        private readonly ClientBusinessRules listClients;
         public frmListAllClients()
         {
             InitializeComponent();
+            listClients = new ClientBusinessRules(new OracleDBClientRepo());
         }
 
         private void frmListAllClients_Load(object sender, EventArgs e)
         {
-            grdViewClients.DataSource = Clients.getAllClients().Tables["Clients"];
+            grdViewClients.ReadOnly = true;
+            grdViewClients.AllowUserToAddRows = false;
+            grdViewClients.DataSource = listClients.GetAllClients();
         }
 
         private void mnuBackToMainMenu_Click(object sender, EventArgs e)

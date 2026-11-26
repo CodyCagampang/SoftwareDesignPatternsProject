@@ -38,7 +38,7 @@
             // grdViewClients
             // 
             grdViewClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            grdViewClients.Location = new Point(106, 145);
+            grdViewClients.Location = new Point(260, 140);
             grdViewClients.Name = "grdViewClients";
             grdViewClients.RowHeadersWidth = 51;
             grdViewClients.RowTemplate.Height = 29;

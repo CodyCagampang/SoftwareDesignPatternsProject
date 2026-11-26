@@ -32,13 +32,14 @@
             mnuBookKennel = new ToolStripMenuItem();
             mnuCancelReservation = new ToolStripMenuItem();
             mnuLogout = new ToolStripMenuItem();
+            mnuUpdateClientDetails = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { mnuBookKennel, mnuCancelReservation, mnuLogout });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { mnuBookKennel, mnuCancelReservation, mnuLogout, mnuUpdateClientDetails });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 28);
@@ -66,6 +67,13 @@
             mnuLogout.Text = "Back To Login";
             mnuLogout.Click += mnuLogout_Click;
             // 
+            // mnuUpdateClientDetails
+            // 
+            mnuUpdateClientDetails.Name = "mnuUpdateClientDetails";
+            mnuUpdateClientDetails.Size = new Size(122, 24);
+            mnuUpdateClientDetails.Text = "Update Details";
+            mnuUpdateClientDetails.Click += mnuUpdateClientDetails_Click;
+            // 
             // frmUserDashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -88,5 +96,6 @@
         private ToolStripMenuItem mnuBookKennel;
         private ToolStripMenuItem mnuCancelReservation;
         private ToolStripMenuItem mnuLogout;
+        private ToolStripMenuItem mnuUpdateClientDetails;
     }
 }

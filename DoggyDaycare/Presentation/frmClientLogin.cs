@@ -1,4 +1,7 @@
 ﻿using DoggyDaycare;
+using DoggyDaycare.Business;
+using DoggyDaycare.Database;
+using DoggyDaycare.Presentation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,9 +17,12 @@ namespace DoggyDaycare
 {
     public partial class frmClientLogin : Form
     {
+        private readonly ClientBusinessRules clientLogin;
         public frmClientLogin()
         {
             InitializeComponent();
+            clientLogin = new ClientBusinessRules(new OracleDBClientRepo());
+           
         }
 
 
@@ -29,24 +35,30 @@ namespace DoggyDaycare
 
         private void btnAccountLogin_Click(object sender, EventArgs e)
         {
-            if (Clients.clientLogin(txtEnterEmail.Text.Trim(), txtEnterPassword.Text.Trim()) > 0)
+            try
             {
-                Clients loggedClients = new Clients();
-                loggedClients.getClientEmail(txtEnterEmail.Text);
-                Clients.LoggedInClientID = loggedClients.getClientID();
+               int clientId = clientLogin.LoginClient(txtEnterEmail.Text.Trim(), txtEnterPassword.Text);
+                Clients.LoggedInClientID = clientId;
 
-                MessageBox.Show("Successful Login!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
-                frmUserDashboard dashboard = new frmUserDashboard();
+            }
+            catch(ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+            MessageBox.Show("Successful Login!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Hide();
+            
+            DashboardFactory factory = new ClientDashboardFactory();
+            Form dashboard = factory.CreateDashboard();
+            {
                 dashboard.ShowDialog();
-                this.Show();
             }
+            Clients.LoggedInClientID = 0;
+            this.Show();
 
-            else
-            {
-                MessageBox.Show("Invalid Email or Password", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-           
+            
            
         }
 

@@ -33,11 +33,10 @@
             menuStrip1 = new MenuStrip();
             mnuKennel = new ToolStripMenuItem();
             mnuAddKennel = new ToolStripMenuItem();
-            mnuRemoveKennel = new ToolStripMenuItem();
+
             mnuUpdateKennel = new ToolStripMenuItem();
             mnuBookAKennel = new ToolStripMenuItem();
             clientsToolStripMenuItem = new ToolStripMenuItem();
-            mnuDeRegisterClient = new ToolStripMenuItem();
             mnuListAllClients = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -64,7 +63,7 @@
             // 
             // mnuKennel
             // 
-            mnuKennel.DropDownItems.AddRange(new ToolStripItem[] { mnuAddKennel, mnuRemoveKennel, mnuUpdateKennel, mnuBookAKennel });
+            mnuKennel.DropDownItems.AddRange(new ToolStripItem[] { mnuAddKennel, mnuUpdateKennel, mnuBookAKennel });
             mnuKennel.Name = "mnuKennel";
             mnuKennel.Size = new Size(74, 24);
             mnuKennel.Text = "Kennels";
@@ -76,12 +75,7 @@
             mnuAddKennel.Text = "Add Kennel";
             mnuAddKennel.Click += mnuAddKennel_Click;
             // 
-            // mnuRemoveKennel
-            // 
-            mnuRemoveKennel.Name = "mnuRemoveKennel";
-            mnuRemoveKennel.Size = new Size(224, 26);
-            mnuRemoveKennel.Text = "Remove Kennel";
-            mnuRemoveKennel.Click += mnuRemoveKennel_Click;
+         
             // 
             // mnuUpdateKennel
             // 
@@ -99,22 +93,15 @@
             // 
             // clientsToolStripMenuItem
             // 
-            clientsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mnuDeRegisterClient, mnuListAllClients });
+            clientsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mnuListAllClients });
             clientsToolStripMenuItem.Name = "clientsToolStripMenuItem";
             clientsToolStripMenuItem.Size = new Size(67, 24);
             clientsToolStripMenuItem.Text = "Clients";
             // 
-            // mnuDeRegisterClient
-            // 
-            mnuDeRegisterClient.Name = "mnuDeRegisterClient";
-            mnuDeRegisterClient.Size = new Size(213, 26);
-            mnuDeRegisterClient.Text = "De-Register Client";
-            mnuDeRegisterClient.Click += mnuDeRegisterClient_Click;
-            // 
             // mnuListAllClients
             // 
             mnuListAllClients.Name = "mnuListAllClients";
-            mnuListAllClients.Size = new Size(213, 26);
+            mnuListAllClients.Size = new Size(224, 26);
             mnuListAllClients.Text = "List All Clients";
             mnuListAllClients.Click += mnuListAllClients_Click;
             // 
@@ -142,10 +129,9 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem mnuKennel;
         private ToolStripMenuItem mnuAddKennel;
-        private ToolStripMenuItem mnuRemoveKennel;
+
         private ToolStripMenuItem mnuUpdateKennel;
         private ToolStripMenuItem clientsToolStripMenuItem;
-        private ToolStripMenuItem mnuDeRegisterClient;
         private ToolStripMenuItem mnuListAllClients;
         private ToolStripMenuItem mnuBookAKennel;
     }

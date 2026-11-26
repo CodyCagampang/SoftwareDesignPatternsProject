@@ -108,3 +108,4 @@ C:\Users\oracle.WELOVESEEDOILS\Desktop\SDP_Project\DoggyDaycare\obj\Debug\net7.0
 C:\Users\oracle.WELOVESEEDOILS\Desktop\SDP_Project\DoggyDaycare\obj\Debug\net7.0-windows\DoggyDaycare.pdb
 C:\Users\oracle.WELOVESEEDOILS\Desktop\SDP_Project\DoggyDaycare\obj\Debug\net7.0-windows\DoggyDaycare.genruntimeconfig.cache
 C:\Users\oracle.WELOVESEEDOILS\Desktop\SDP_Project\DoggyDaycare\obj\Debug\net7.0-windows\ref\DoggyDaycare.dll
+C:\Users\oracle.WELOVESEEDOILS\Desktop\SDP_Project\DoggyDaycare\obj\Debug\net7.0-windows\DoggyDaycare.Presentation.frmUpdateAccount.resources

@@ -47,7 +47,7 @@
             // lblRegisterEmail
             // 
             lblRegisterEmail.AutoSize = true;
-            lblRegisterEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblRegisterEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lblRegisterEmail.Location = new Point(20, 65);
             lblRegisterEmail.Name = "lblRegisterEmail";
             lblRegisterEmail.Size = new Size(113, 28);
@@ -96,7 +96,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(20, 119);
             label1.Name = "label1";
             label1.Size = new Size(147, 28);

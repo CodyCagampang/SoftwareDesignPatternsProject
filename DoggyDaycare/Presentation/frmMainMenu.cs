@@ -28,12 +28,7 @@ namespace DoggyDaycare
             this.Show();
         }
 
-        private void mnuRemoveKennel_Click(object sender, EventArgs e)
-        {
-            frmDeleteKennel frmDeleteKennel = new frmDeleteKennel(this);
-            this.Hide();
-            frmDeleteKennel.ShowDialog();
-        }
+        
 
         private void mnuBookAKennel_Click(object sender, EventArgs e)
         {
@@ -52,13 +47,7 @@ namespace DoggyDaycare
         }
 
 
-        private void mnuDeRegisterClient_Click(object sender, EventArgs e)
-        {
-            frmDeleteAClient deleteAClient = new frmDeleteAClient(this);
-            this.Hide();
-            deleteAClient.ShowDialog();
-            this.Show();
-        }
+        
 
         private void mnuListAllClients_Click(object sender, EventArgs e)
         {
