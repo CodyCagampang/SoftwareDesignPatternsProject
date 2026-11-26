@@ -135,7 +135,7 @@ namespace DoggyDaycare.Database
 
         }
 
-        public bool TryCancelReservationForClient(int reservationID, int clientId, DateTime cancellationPeriod)
+        public bool TryCancelReservationForClient(int reservationId, int clientId, DateTime cancellationPeriod)
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             String sqlQuery = "UPDATE Reservations SET ResStatus = 'Cancelled' WHERE ResID = :reservationId AND ClientID = :clientId AND ResStatus = 'Confirmed' AND StartDate >= :cancellationPeriod";
@@ -144,7 +144,7 @@ namespace DoggyDaycare.Database
             cmd.BindByName = true;
             OracleTransaction transaction = conn.BeginTransaction();
 
-            cmd.Parameters.Add("reservationId", OracleDbType.Int32).Value = reservationID;
+            cmd.Parameters.Add("reservationId", OracleDbType.Int32).Value = reservationId;
             cmd.Parameters.Add("clientId", OracleDbType.Int32).Value = clientId;
             cmd.Parameters.Add("cancellationPeriod", OracleDbType.Date).Value = cancellationPeriod;
 
@@ -157,7 +157,7 @@ namespace DoggyDaycare.Database
             cmd.Parameters.Clear();
 
             sqlQuery = "UPDATE Kennels SET STATUS = 'Available' WHERE KennelID = (SELECT KennelID FROM Reservations WHERE ResID = :reservationID)";
-            cmd.Parameters.Add("reservationId", OracleDbType.Int32).Value = reservationID;
+            cmd.Parameters.Add("reservationId", OracleDbType.Int32).Value = reservationId;
             int kennelRows = cmd.ExecuteNonQuery();
             if(kennelRows != 1)
             {

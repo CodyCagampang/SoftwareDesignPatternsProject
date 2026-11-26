@@ -15,7 +15,6 @@ namespace DoggyDaycare
     public partial class frmCancelReservation : Form
     {
         private readonly BookingBusinessRules bookingOperations;
-        private readonly KennelBusinessRules kennelOperations;
 
 
         public frmCancelReservation()
@@ -24,7 +23,6 @@ namespace DoggyDaycare
 
             // Ensure that the Presentation Layer can access the business and Database layer
             bookingOperations = new BookingBusinessRules(new OracleDBBookingRepo());
-            kennelOperations = new KennelBusinessRules(new OracleDBKennelRepo());
         }
 
         private void btnSearchResID_Click(object sender, EventArgs e)

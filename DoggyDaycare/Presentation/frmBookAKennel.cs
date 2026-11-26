@@ -18,7 +18,7 @@ namespace DoggyDaycare
         Clients bookClient = new Clients();
         private readonly KennelBusinessRules kennelOperations;
         private readonly BookingBusinessRules bookingOperations;
-        private readonly DogBusinessRules dogBusinessRules;
+
       
         
 
@@ -28,7 +28,7 @@ namespace DoggyDaycare
 
             this.kennelOperations = new KennelBusinessRules(new OracleDBKennelRepo());
             bookingOperations = new BookingBusinessRules(new OracleDBBookingRepo());
-            dogBusinessRules = new DogBusinessRules();
+            
         }
 
         private void frmBookAKennel_Load(object sender, EventArgs e)

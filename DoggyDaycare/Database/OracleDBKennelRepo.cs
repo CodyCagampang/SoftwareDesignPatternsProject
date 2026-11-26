@@ -180,8 +180,10 @@ namespace DoggyDaycare.Database
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             conn.Open();
 
-            String sqlQuery = "SELECT * FROM Reservations WHERE ClientID = " + clientID + " AND ResStatus = 'Confirmed'";
+            String sqlQuery = "SELECT * FROM Reservations WHERE ClientID = :clientId" + " AND ResStatus = 'Confirmed'";
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            cmd.BindByName = true;
+            cmd.Parameters.Add("clientId", OracleDbType.Int32).Value = clientID;
             OracleDataAdapter da = new OracleDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds, "Reservations");

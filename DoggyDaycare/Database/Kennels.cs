@@ -81,8 +81,10 @@ namespace DoggyDaycare.Database
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             conn.Open();
 
-            string sqlQuery = "SELECT * FROM Kennels WHERE KennelID = " + Id;
+            string sqlQuery = "SELECT * FROM Kennels WHERE KennelID = :kennelId";
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            cmd.BindByName = true;
+            cmd.Parameters.Add("kennelId", OracleDbType.Int32).Value = Id;
             OracleDataReader dr = cmd.ExecuteReader();
             dr.Read();
 
@@ -118,18 +120,7 @@ namespace DoggyDaycare.Database
             conn.Close();
         }
 
-        // Use Case ID 2 --> Delete A Kennel
-        public void deleteKennel()
-        {
-            OracleConnection conn = new OracleConnection(DBConnect.oradb);
-            conn.Open(); // <— if slow or blocked, UI freezes here
-
-            string sqlQuery = "DELETE FROM Kennels WHERE KennelId = " + kennelID;
-            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
-            cmd.ExecuteNonQuery(); // <— this line hangs the UI
-
-            conn.Close();
-        }
+      
 
 
         // Use Case ID 3 --> Update a Kennel

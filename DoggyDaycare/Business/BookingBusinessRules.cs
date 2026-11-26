@@ -92,7 +92,7 @@ namespace DoggyDaycare.Business
                     "A valid client and kennel must be selected.");
             }
 
-            DogBusinessRules dogRules = new DogBusinessRules();
+            
 
             DogBusinessRules.ValidateDogWeight(dog.getDogName(), dog.getDogBreed(), dog.getDogWeight());
 

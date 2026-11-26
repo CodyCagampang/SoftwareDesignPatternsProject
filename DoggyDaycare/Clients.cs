@@ -98,8 +98,10 @@ namespace DoggyDaycare
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             conn.Open();
-            String sqlQuery = "SELECT * FROM Clients WHERE ClientID = " + Id;
+            String sqlQuery = "SELECT * FROM Clients WHERE ClientID = :clientId";
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            cmd.BindByName = true;
+            cmd.Parameters.Add("clientId", OracleDbType.Int32).Value = Id;
             OracleDataReader dr = cmd.ExecuteReader();
 
             if (dr.Read())
