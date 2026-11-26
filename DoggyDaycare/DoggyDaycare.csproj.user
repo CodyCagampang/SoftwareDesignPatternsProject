@@ -1,40 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="frmAddKennel.cs">
+    <Compile Update="Presentation\frmAddKennel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmAdminLogin.cs">
+    <Compile Update="Presentation\frmAdminLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmBookAKennel.cs">
+    <Compile Update="Presentation\frmBookAKennel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmCancelReservation.cs">
+    <Compile Update="Presentation\frmCancelReservation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmClientLogin.cs">
+    <Compile Update="Presentation\frmClientLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmClientRegister.cs">
+    <Compile Update="Presentation\frmClientRegister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmDeleteKennel.cs">
+    <Compile Update="Presentation\frmListAllClients.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmDeleteAClient.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="frmListAllClients.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="frmMainMenu.cs">
+    <Compile Update="Presentation\frmMainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="frmRegisterPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="frmUpdateKennel.cs">
+    <Compile Update="Presentation\frmUpdateAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Presentation\frmUpdateKennel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="frmUserDashboard.cs">

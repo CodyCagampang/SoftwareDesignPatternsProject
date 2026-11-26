@@ -5,10 +5,11 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using DoggyDaycare.Database;
 using Oracle.ManagedDataAccess.Client;
 namespace DoggyDaycare
 {
-    class Reservations
+     public class Reservations
     {
         private int resID;
         private int clientID;
@@ -147,19 +148,7 @@ namespace DoggyDaycare
             conn.Close();
         }
 
-        public static DataSet retrieveAllReservations(int clientID)
-        {
-            OracleConnection conn = new OracleConnection(DBConnect.oradb);
-            conn.Open();
-
-            String sqlQuery = "SELECT * FROM Reservations WHERE ClientID = " + clientID + " AND ResStatus = 'Confirmed'";
-            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds, "Reservations");
-            conn.Close();
-            return ds;
-        }
+       
         public static int getNextReservationID()
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);

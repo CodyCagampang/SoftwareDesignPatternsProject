@@ -4,11 +4,12 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DoggyDaycare.Database;
 using Oracle.ManagedDataAccess.Client;
 
 namespace DoggyDaycare
 {
-    class Clients
+    public class Clients
     {
         private int clientID;
         private String firstName;

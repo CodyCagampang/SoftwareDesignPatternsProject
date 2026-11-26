@@ -1,4 +1,5 @@
 ﻿using DoggyDaycare;
+using DoggyDaycare.Presentation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,8 @@ namespace DoggyDaycare
     public partial class frmUserDashboard : Form
     {
         private frmClientLogin frmClientLogin;
+
+       
 
         public frmUserDashboard()
         {
@@ -32,27 +35,40 @@ namespace DoggyDaycare
 
         private void mnuLogout_Click(object sender, EventArgs e)
         {
+            Clients.LoggedInClientID = 0;
+            this.Close();
+            /*
             frmClientLogin logout = new frmClientLogin();
             this.Close();
             logout.ShowDialog();
             this.Show();
+            */
 
         }
 
         private void mnuBookKennel_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            frmBookAKennel book = new frmBookAKennel();
-            book.ShowDialog();
-            this.Close();
+            using (frmBookAKennel book = new frmBookAKennel())
+            {
+                book.ShowDialog(this);
+            }
         }
 
         private void mnuCancelReservation_Click(object sender, EventArgs e)
         {
-            frmCancelReservation cancel = new frmCancelReservation();
-            cancel.ShowDialog();
-            this.Close();
+            using (frmCancelReservation cancel = new frmCancelReservation())
+            {
+                cancel.ShowDialog(this);
+            }
 
+        }
+
+        private void mnuUpdateClientDetails_Click(object sender, EventArgs e)
+        {
+            using (frmUpdateAccount updateForm = new frmUpdateAccount())
+            {
+                updateForm.ShowDialog(this);
+            }
         }
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\oracle.WELOVESEEDOILS\\Desktop\\SWEP_Cagampang_Cody_Resubmission\\DoggyDaycare\\DoggyDaycare\\DoggyDaycare.csproj": {}
+    "C:\\Users\\oracle.WELOVESEEDOILS\\Desktop\\SDP_Project\\DoggyDaycare\\DoggyDaycare.csproj": {}
   },
   "projects": {
-    "C:\\Users\\oracle.WELOVESEEDOILS\\Desktop\\SWEP_Cagampang_Cody_Resubmission\\DoggyDaycare\\DoggyDaycare\\DoggyDaycare.csproj": {
+    "C:\\Users\\oracle.WELOVESEEDOILS\\Desktop\\SDP_Project\\DoggyDaycare\\DoggyDaycare.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\oracle.WELOVESEEDOILS\\Desktop\\SWEP_Cagampang_Cody_Resubmission\\DoggyDaycare\\DoggyDaycare\\DoggyDaycare.csproj",
+        "projectUniqueName": "C:\\Users\\oracle.WELOVESEEDOILS\\Desktop\\SDP_Project\\DoggyDaycare\\DoggyDaycare.csproj",
         "projectName": "DoggyDaycare",
-        "projectPath": "C:\\Users\\oracle.WELOVESEEDOILS\\Desktop\\SWEP_Cagampang_Cody_Resubmission\\DoggyDaycare\\DoggyDaycare\\DoggyDaycare.csproj",
+        "projectPath": "C:\\Users\\oracle.WELOVESEEDOILS\\Desktop\\SDP_Project\\DoggyDaycare\\DoggyDaycare.csproj",
         "packagesPath": "C:\\Users\\oracle.WELOVESEEDOILS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\oracle.WELOVESEEDOILS\\Desktop\\SWEP_Cagampang_Cody_Resubmission\\DoggyDaycare\\DoggyDaycare\\obj\\",
+        "outputPath": "C:\\Users\\oracle.WELOVESEEDOILS\\Desktop\\SDP_Project\\DoggyDaycare\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

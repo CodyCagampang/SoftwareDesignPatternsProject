@@ -7,7 +7,7 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace DoggyDaycare.Database
 {
-    class Kennels
+   public class Kennels
     {
         private int kennelID;
         private string kennelType;
