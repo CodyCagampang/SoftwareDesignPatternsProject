@@ -118,8 +118,10 @@ namespace DoggyDaycare
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             conn.Open();
-            String sqlQuery = "SELECT COUNT(*) FROM Reservations WHERE ClientID = " + clientID + "AND ResStatus = 'Confirmed'";
+            String sqlQuery = "SELECT COUNT(*) FROM Reservations WHERE ClientID = :clientId AND ResStatus = 'Confirmed'";
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            cmd.BindByName = true;
+            cmd.Parameters.Add("clientId", OracleDbType.Int32).Value = clientID;    
 
             OracleDataReader dr = cmd.ExecuteReader();
             int count = 0;
@@ -132,15 +134,17 @@ namespace DoggyDaycare
             return count;
         } 
 
-        public static int LoggedInClientID = 0;
+        public const int LoggedInClientID = 0;
 
         public void getClientEmail(string email)
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             conn.Open();
 
-            String sqlQuery = "SELECT * FROM Clients WHERE Email = '" + email + "'";
+            String sqlQuery = "SELECT * FROM Clients WHERE Email = :email";
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            cmd.BindByName = true;
+            cmd.Parameters.Add("email", OracleDbType.Varchar2).Value = email;
             OracleDataReader dataReader = cmd.ExecuteReader();
 
             if (dataReader.Read())
@@ -148,7 +152,7 @@ namespace DoggyDaycare
                 clientID = dataReader.GetInt32(0);
                 firstName = dataReader.GetString(1);
                 lastName = dataReader.GetString(2);
-                email = dataReader.GetString(3);
+                this.email = dataReader.GetString(3);
                 password = dataReader.GetString(4);
                 phoneNumber = dataReader.GetString(5);
 
@@ -160,8 +164,10 @@ namespace DoggyDaycare
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             conn.Open();
 
-            String sqlQuery = "SELECT * FROM Clients WHERE ClientID = " + id;
+            String sqlQuery = "SELECT * FROM Clients WHERE ClientID = :clientId" ;
             OracleCommand cmd = new OracleCommand( sqlQuery, conn);
+            cmd.BindByName = true;
+            cmd.Parameters.Add("clientId", OracleDbType.Int32).Value = id;
             OracleDataReader dr= cmd.ExecuteReader();
             if (dr.Read())
             {
@@ -185,15 +191,15 @@ namespace DoggyDaycare
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
 
-            String sqlQuery = "INSERT INTO Clients VALUES (" +
-                this.clientID + ",'" +
-                this.firstName + "','" +
-                this.lastName + "','" +
-                this.email + "','" +
-                this.password + "','" +
-                this.phoneNumber + "')";
-
-            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            String sqlQuery = "INSERT INTO Clients " + "(ClientID, FirstName, LastName, Email, Password, PhoneNum) " + "VALUES (:clientId, :firstName, :lastName, :email, :password, :phoneNumber)";
+            using OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            cmd.BindByName = true;
+            cmd.Parameters.Add("clientId", OracleDbType.Int32).Value = this.clientID;
+            cmd.Parameters.Add("firstName", OracleDbType.Varchar2).Value = this.firstName;
+            cmd.Parameters.Add("lastName", OracleDbType.Varchar2).Value = this.lastName;
+            cmd.Parameters.Add("email", OracleDbType.Varchar2).Value = this.email;
+            cmd.Parameters.Add("password", OracleDbType.Varchar2).Value = this.password;
+            cmd.Parameters.Add("phoneNumber", OracleDbType.Varchar2).Value = this.phoneNumber;
             conn.Open();
 
             cmd.ExecuteNonQuery();
@@ -206,9 +212,10 @@ namespace DoggyDaycare
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             conn.Open();
 
-            string sqlQuery = "SELECT COUNT(*) FROM Clients WHERE Email = '" + email + "'";
+            string sqlQuery = "SELECT COUNT(*) FROM Clients WHERE Email = :email";
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
-
+            cmd.BindByName = true;
+            cmd.Parameters.Add("email", OracleDbType.Varchar2).Value = email;
             int count = 0;
             OracleDataReader dr = cmd.ExecuteReader();
             if (dr.Read())
@@ -226,8 +233,11 @@ namespace DoggyDaycare
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             conn.Open();
 
-            String sqlQuery = "SELECT COUNT(*) FROM Clients WHERE Email = '" + email + "' AND Password = '" + password + "'";
+            String sqlQuery = "SELECT COUNT(*) FROM Clients " + "WHERE Email = :email AND Password = :password";
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            cmd.BindByName = true;
+            cmd.Parameters.Add("email", OracleDbType.Varchar2).Value = email;
+            cmd.Parameters.Add("password", OracleDbType.Varchar2).Value = password;
             
             int count = 0;
             OracleDataReader dr = cmd.ExecuteReader();
@@ -266,16 +276,6 @@ namespace DoggyDaycare
         }
 
 
-
-        public void deleteClient()
-        {
-            OracleConnection conn = new OracleConnection(DBConnect.oradb);
-            conn.Open();
-            String sqlQuery = "DELETE FROM Clients WHERE ClientID = " + this.clientID;
-            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
-            cmd.ExecuteNonQuery();
-            conn.Close();
-        }
 
         public static DataSet getAllClients()
         {
