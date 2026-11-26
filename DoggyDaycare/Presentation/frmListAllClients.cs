@@ -42,7 +42,7 @@ namespace DoggyDaycare
 
         private void grdViewClients_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            // This grid only displays client details, so cell clicks require no action.
         }
     }
 }

@@ -71,7 +71,7 @@ namespace DoggyDaycare
 
         private void btnAddKennel_Click(object sender, EventArgs e)
         {
-            if (!kennelOperations.IsDescriptionValid(txtKennelDescription.Text) || cboKennelTypes.SelectedIndex == -1 || cboKennelCondition.SelectedIndex == -1 || cboCurrentStatus.SelectedIndex == -1 || string.IsNullOrWhiteSpace(txtDailyRate.Text)) 
+            if (!KennelBusinessRules.IsDescriptionValid(txtKennelDescription.Text) || cboKennelTypes.SelectedIndex == -1 || cboKennelCondition.SelectedIndex == -1 || cboCurrentStatus.SelectedIndex == -1 || string.IsNullOrWhiteSpace(txtDailyRate.Text)) 
                
             {
                 MessageBox.Show("All Fields must be entered!");
@@ -85,7 +85,7 @@ namespace DoggyDaycare
                 return;
             }
 
-            if (!kennelOperations.IsDailyRateValid(dailyRate))
+            if (!KennelBusinessRules.IsDailyRateValid(dailyRate))
             {
                 MessageBox.Show("You must enter a daily rate greater than zero.");
                 return;

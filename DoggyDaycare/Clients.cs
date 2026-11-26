@@ -134,7 +134,7 @@ namespace DoggyDaycare
             return count;
         } 
 
-        public const int LoggedInClientID = 0;
+        public static int LoggedInClientID = 0;
 
         public void getClientEmail(string email)
         {

@@ -8,7 +8,7 @@ namespace DoggyDaycare.Business
 {
     public class DogBusinessRules
     {
-        public void ValidateDogWeight(String name, String breed, double weight)
+        public static void ValidateDogWeight(String name, String breed, double weight)
         {
             if(string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(breed)) 
             {

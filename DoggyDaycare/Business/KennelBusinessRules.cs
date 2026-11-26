@@ -33,12 +33,12 @@ namespace DoggyDaycare.Business
             return repository.GetKennelStatus();
         }
 
-        public bool IsDailyRateValid(decimal dailyRate)
+        public static bool IsDailyRateValid(decimal dailyRate)
         {
             return dailyRate > 0;
         }
 
-        public bool IsDescriptionValid(string description)
+        public static bool IsDescriptionValid(string description)
         {
             return !string.IsNullOrWhiteSpace(description);
         }
@@ -64,7 +64,7 @@ namespace DoggyDaycare.Business
             repository.AddKennel(kennel);
         }
 
-        public bool isKennelSizeValid(String size)
+        public static bool isKennelSizeValid(String size)
         {
             return size == "S" || size == "M" || size == "L";
         }

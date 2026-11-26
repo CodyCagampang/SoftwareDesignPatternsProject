@@ -126,6 +126,7 @@ namespace DoggyDaycare
             totalCost = TotalCost;
         }
 
+        /*
         public void confirmReservation()
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
@@ -147,7 +148,7 @@ namespace DoggyDaycare
             cmd.ExecuteNonQuery();
             conn.Close();
         }
-
+        */
        
         public static int getNextReservationID()
         {
@@ -177,8 +178,10 @@ namespace DoggyDaycare
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             conn.Open();
-            String sqlQuery = "SELECT * FROM Reservations WHERE ResID = " + resID;
+            String sqlQuery = "SELECT * FROM Reservations WHERE ResID = :resID";
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            cmd.BindByName = true;
+            cmd.Parameters.Add("resID", OracleDbType.Int32).Value = resID;
             OracleDataReader dr = cmd.ExecuteReader();
             if (dr.Read())
             {
@@ -194,6 +197,7 @@ namespace DoggyDaycare
             conn.Close();
         }
 
+        /*
         public static int getReservationCount(int kennelID)
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
@@ -210,6 +214,9 @@ namespace DoggyDaycare
             conn.Close();
             return count;
         }
+        */
+
+        /*
         public void updateReservationStatus()
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
@@ -222,6 +229,7 @@ namespace DoggyDaycare
 
             conn.Close();
         }
+        */
 
     }
 

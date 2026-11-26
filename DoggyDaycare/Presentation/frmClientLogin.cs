@@ -51,7 +51,7 @@ namespace DoggyDaycare
             this.Hide();
             
             DashboardFactory factory = new ClientDashboardFactory();
-            Form dashboard = factory.CreateDashboard();
+            Form dashboard = factory.CreateForm();
             {
                 dashboard.ShowDialog();
             }

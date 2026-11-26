@@ -37,12 +37,7 @@ namespace DoggyDaycare
         {
             Clients.LoggedInClientID = 0;
             this.Close();
-            /*
-            frmClientLogin logout = new frmClientLogin();
-            this.Close();
-            logout.ShowDialog();
-            this.Show();
-            */
+            
 
         }
 

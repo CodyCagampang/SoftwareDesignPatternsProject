@@ -71,7 +71,7 @@ namespace DoggyDaycare
         {
 
             String size = txtSearchKennelSize.Text.Trim().ToUpper();
-            if (!kennelOperations.isKennelSizeValid(size))
+            if (!KennelBusinessRules.isKennelSizeValid(size))
             {
                 MessageBox.Show("Please enter 'S' for Small, 'M' for Medium or 'L' for Large!", "Invalid Search Values", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtSearchKennelSize.Focus();
@@ -115,7 +115,7 @@ namespace DoggyDaycare
 
             try
             {
-                dogBusinessRules.ValidateDogWeight(txtDogName.Text, txtDogBreed.Text, weight);
+                DogBusinessRules.ValidateDogWeight(txtDogName.Text, txtDogBreed.Text, weight);
             }
             catch (ArgumentException ex)
             {
@@ -127,7 +127,7 @@ namespace DoggyDaycare
 
 
 
-            if (!bookingOperations.isWeightValid(kennelType, weight))
+            if (!BookingBusinessRules.isWeightValid(kennelType, weight))
             {
                 MessageBox.Show("The dog's weight is outside the range for this kennel.", "Weight Limit Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -143,7 +143,7 @@ namespace DoggyDaycare
 
             try
             {
-                totalDays = bookingOperations.GetTotalDays(startDate, endDate, DateTime.Today);
+                totalDays = BookingBusinessRules.GetTotalDays(startDate, endDate, DateTime.Today);
             }
             catch (ArgumentException ex)
             {
@@ -170,7 +170,7 @@ namespace DoggyDaycare
             int reservationID;
             try
             {
-                decimal totalCost = bookingOperations.CalculateTotalCost(totalDays, selectedDailyRate);
+                decimal totalCost = BookingBusinessRules.CalculateTotalCost(totalDays, selectedDailyRate);
                 reservationID = bookingOperations.BookKennel(dogs, reservation, selectedKennelType, selectedDailyRate);
                 txtTotalCost.Text = "€" + totalCost.ToString("0.00");
             }

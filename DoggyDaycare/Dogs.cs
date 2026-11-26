@@ -49,6 +49,7 @@ namespace DoggyDaycare
         public void setDogBreed(String DogBreed) { this.DogBreed= DogBreed;}
         public void setDogWeight(double dogWeight) { this.DogWeight = dogWeight;}
 
+        /*
         public void getDogID(int Id)
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
@@ -69,7 +70,9 @@ namespace DoggyDaycare
 
             conn.Close();
         }
+        */
 
+        /*
         public void saveDogDetails()
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
@@ -86,6 +89,7 @@ namespace DoggyDaycare
             cmd.ExecuteNonQuery();
             conn.Close();
         }
+        */
 
 
         public void getDog(int dogID)
@@ -93,8 +97,10 @@ namespace DoggyDaycare
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             conn.Open();
 
-            String sqlQuery = "SELECT * FROM Dogs WHERE DogID = " + dogID;
+            String sqlQuery = "SELECT * FROM Dogs WHERE DogID = :dogID";
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            cmd.BindByName = true;
+            cmd.Parameters.Add("dogID", OracleDbType.Int32).Value = dogID;
             OracleDataReader dr = cmd.ExecuteReader();
             if (dr.Read())
             {

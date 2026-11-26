@@ -143,7 +143,7 @@ namespace DoggyDaycare
 
         private void txtKennelID_TextChanged(object sender, EventArgs e)
         {
-
+            // The Kennel ID Changes automatically after updating a kenne;
         }
 
         

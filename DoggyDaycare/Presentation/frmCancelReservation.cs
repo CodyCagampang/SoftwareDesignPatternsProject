@@ -123,50 +123,7 @@ namespace DoggyDaycare
 
             MessageBox.Show("Reservation cancelled successfully!");
         }
-        /*
-        int resID = Convert.ToInt32(grdCancelReservation.CurrentRow.Cells[0].Value);
-
-        Reservations reservations = new Reservations();
-        reservations.getReservation(resID);
-
-        // Check if Status is Confirmed
-        if (reservations.getResStatus() != "Confirmed")
-        {
-            MessageBox.Show("Reservation must be set to 'Confirmed' before it can be cancelled", "Invalid Reservation Status", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
-        }
-
-        // Use Case 8 - Step 8: Validate Cancellation is at least 72 hours before start date
-        if ((reservations.getStartDate() - DateTime.Now).TotalHours < 72)
-        {
-            MessageBox.Show("The cancellation period has exceeded! All cancellations must be made 72 hours beforehand", "Cancellation Period Overdue", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
-        }
-
-        // Use Case 8 - Step 10: Display a final warning message
-        DialogResult result = MessageBox.Show("Are you sure you want to cancel this reservation?", "Confirm Cancellation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-        if (result == DialogResult.Yes)
-        {
-            // Use Case 8 - Step 11: Update Status from "Confirmed" to "Cancelled"
-            reservations.setResStatus("Cancelled");
-            reservations.updateReservationStatus();
-
-            Kennels.updateKennelStatusAfterCancellation(reservations.getKennelID());
-
-            // Step 12: Reset UI
-            MessageBox.Show("Reservation cancelled successfully!", "Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            txtKennelID.Clear();
-            txtDogName.Clear();
-            txtDogBreed.Clear();
-            txtDogWeight.Clear();
-            cboKennelTypes.SelectedIndex = -1;
-            txtDailyRate.Clear();
-            dtpCheckIn.Value = DateTime.Now;
-            dtpCheckOut.Value = DateTime.Now.AddDays(1);
-
-            DataSet ds = bookingOperations.retrieveAllReservations(Clients.LoggedInClientID);
-            grdCancelReservation.DataSource = ds.Tables["Reservations"];
-        */
+        
     
         
 

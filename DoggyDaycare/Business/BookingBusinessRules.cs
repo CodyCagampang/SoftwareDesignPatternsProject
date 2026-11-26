@@ -16,7 +16,7 @@ namespace DoggyDaycare.Business
         {
             this.repository = repository;
         }
-        public int GetTotalDays(DateTime startDate, DateTime endDate, DateTime today)
+        public static int GetTotalDays(DateTime startDate, DateTime endDate, DateTime today)
         {
             startDate = startDate.Date;
             endDate = endDate.Date;
@@ -43,7 +43,7 @@ namespace DoggyDaycare.Business
 
 
         // Context class --> Implements the strategy interface
-        public bool isWeightValid(String kennelType, double weight)
+        public static bool isWeightValid(String kennelType, double weight)
         {
             IStrategyPatternDogWeight kennelWeight;
             switch(kennelType)
@@ -63,7 +63,7 @@ namespace DoggyDaycare.Business
             return kennelWeight.validateDogWeight(weight);
         }
 
-        public decimal CalculateTotalCost(int totalDays, decimal dailyRate)
+        public static decimal CalculateTotalCost(int totalDays, decimal dailyRate)
         {
             if(totalDays < 1 || totalDays > 31)
             {
@@ -94,7 +94,7 @@ namespace DoggyDaycare.Business
 
             DogBusinessRules dogRules = new DogBusinessRules();
 
-            dogRules.ValidateDogWeight(dog.getDogName(), dog.getDogBreed(), dog.getDogWeight());
+            DogBusinessRules.ValidateDogWeight(dog.getDogName(), dog.getDogBreed(), dog.getDogWeight());
 
             if (!isWeightValid(kennelType, dog.getDogWeight()))
             {

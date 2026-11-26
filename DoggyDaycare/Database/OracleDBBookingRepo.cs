@@ -13,7 +13,7 @@ namespace DoggyDaycare.Database
 {
     public class OracleDBBookingRepo : IBookingRepository
     {
-        public int SaveBooking(Dogs dog, Reservations reservation, String kennelType, decimal dailyRate, decimal totalCost)
+        public int SaveBooking(Dogs dog, Reservations reservations, String kennelType, decimal dailyRate, decimal totalCost)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace DoggyDaycare.Database
                     sqlQuery = "UPDATE Kennels SET Status = 'Unavailable' " + "WHERE KennelID = :kennelID " + "AND Status = 'Available' " + "AND KennelType = :kennelType " + "AND DailyRate = :dailyRate";
                     cmd.CommandText = sqlQuery;
 
-                    cmd.Parameters.Add("kennelID", reservation.getKennelID());
+                    cmd.Parameters.Add("kennelID", reservations.getKennelID());
                     cmd.Parameters.Add("kennelType", kennelType);
                     cmd.Parameters.Add("dailyRate", dailyRate);
 
@@ -70,11 +70,11 @@ namespace DoggyDaycare.Database
                     sqlQuery = "INSERT INTO Reservations " + "(ResID, ClientID, KennelID, DogID, StartDate, EndDate, resStatus, totalCost)" + "VALUES (:resID, :clientID, :kennelID, :dogID, :startDate, :endDate, :resStatus, :totalCost)";
                     cmd.CommandText = sqlQuery;
                     cmd.Parameters.Add("resID", reservationID);
-                    cmd.Parameters.Add("clientID", reservation.getClientID());
-                    cmd.Parameters.Add("kennelID", reservation.getKennelID());
+                    cmd.Parameters.Add("clientID", reservations.getClientID());
+                    cmd.Parameters.Add("kennelID", reservations.getKennelID());
                     cmd.Parameters.Add("dogID", dogID);
-                    cmd.Parameters.Add("startDate", reservation.getStartDate().Date);
-                    cmd.Parameters.Add("endDate", reservation.getEndDate().Date);
+                    cmd.Parameters.Add("startDate", reservations.getStartDate().Date);
+                    cmd.Parameters.Add("endDate", reservations.getEndDate().Date);
                     cmd.Parameters.Add("resStatus", "Confirmed");
                     cmd.Parameters.Add("totalCost", totalCost);
 
@@ -117,14 +117,14 @@ namespace DoggyDaycare.Database
 
         }
 
-        public DataTable GetReservationForClient(int reservationID, int clientId)
+        public DataTable GetReservationForClient(int reservationId, int clientId)
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             String sqlQuery = "SELECT ResID, KennelID, StartDate, ResStatus FROM Reservations WHERE ResID = :resId AND ClientID = :clientId";
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
 
             cmd.BindByName = true;
-            cmd.Parameters.Add("resId", OracleDbType.Int32).Value = reservationID;
+            cmd.Parameters.Add("resId", OracleDbType.Int32).Value = reservationId;
             cmd.Parameters.Add("clientId", OracleDbType.Int32).Value = clientId;
 
             var results = new DataTable();

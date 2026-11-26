@@ -102,16 +102,17 @@ namespace DoggyDaycare.Database
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             conn.Open();
 
-            string sqlQuery = "INSERT INTO Kennels Values (" +
-                kennelID + ",'" +
-                kennelType + "','" +
-                description + "','" +
-                kennelCondition + "'," +
-                dailyRate.ToString() + ",'" +
-                status + "')";
-
+            string sqlQuery = "INSERT INTO Kennels " + "(KennelID, KennelType, Description, KennelCondition, DailyRate, Status) " + "VALUES (:kennelId, :kennelType, :description, :kennelCondition, :dailyRate, :status)";
             OracleCommand cmd = new OracleCommand( sqlQuery, conn);
-           
+            cmd.BindByName = true;
+
+            cmd.Parameters.Add("kennelId", OracleDbType.Int32).Value = kennelID;
+            cmd.Parameters.Add("kennelType", OracleDbType.Varchar2).Value = kennelType;
+            cmd.Parameters.Add("description", OracleDbType.Varchar2).Value = description;
+            cmd.Parameters.Add("kennelCondition", OracleDbType.Varchar2).Value = kennelCondition;
+            cmd.Parameters.Add("dailyRate", OracleDbType.Decimal).Value = dailyRate;
+            cmd.Parameters.Add("status", OracleDbType.Varchar2).Value = status;
+
 
             cmd.ExecuteNonQuery();
             conn.Close();
@@ -136,15 +137,15 @@ namespace DoggyDaycare.Database
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             conn.Open();
-            string sqlQuery = "UPDATE Kennels SET " +
-                "KennelType = '" + kennelType + "'," +
-                "Description = '" + description + "'," +
-                "KennelCondition = '" + kennelCondition + "'," +
-                "DailyRate = " + dailyRate + "," +
-                "Status = '" + status + "' " +
-                "WHERE KennelId = " + kennelID;
-
+            string sqlQuery = "UPDATE Kennels SET " + "KennelType = :kennelType, " + "Description = :description, " + "KennelCondition = :kennelCondition, " + "DailyRate = :dailyRate, " + "Status = :status, " + "WHERE KennelId = :kennelId";
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            cmd.BindByName = true;
+            cmd.Parameters.Add("kennelType", OracleDbType.Varchar2).Value = kennelType;
+            cmd.Parameters.Add("description", OracleDbType.Varchar2).Value = description;
+            cmd.Parameters.Add("kennelCondition", OracleDbType.Varchar2).Value = kennelCondition;
+            cmd.Parameters.Add("dailyRate", OracleDbType.Decimal).Value = dailyRate;
+            cmd.Parameters.Add("status", OracleDbType.Varchar2).Value = status;
+            cmd.Parameters.Add("kennelId", OracleDbType.Int32).Value = kennelID;
 
             cmd.ExecuteNonQuery();
 
@@ -154,7 +155,7 @@ namespace DoggyDaycare.Database
 
         
 
-        public static DataSet findKennels(string specificKennel)
+        /*public static DataSet findKennels(string specificKennel)
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
             conn.Open();
@@ -170,7 +171,9 @@ namespace DoggyDaycare.Database
             conn.Close();
             return ds;
         }
+        */
 
+        /*
         public static DataSet typeResults(string type)
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
@@ -189,7 +192,9 @@ namespace DoggyDaycare.Database
             conn.Close();
             return ds;
         }
+        */
 
+        /*
         public static void updateKennelStatus(int kennelID)
         {
             OracleConnection conn = new OracleConnection( DBConnect.oradb);
@@ -201,7 +206,9 @@ namespace DoggyDaycare.Database
 
             conn.Close();
         }
+        */
 
+        /*
         public static void updateKennelStatusAfterCancellation(int kennelID)
         {
             OracleConnection conn = new OracleConnection(DBConnect.oradb);
@@ -213,6 +220,7 @@ namespace DoggyDaycare.Database
 
             conn.Close();
         }
+        */
 
 
         public static DataSet getAllKennels()
